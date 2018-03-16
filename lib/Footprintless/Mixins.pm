@@ -81,6 +81,7 @@ sub _download {
     my @options = $to && ref($resource) && $resource->{as} 
         ? (to => File::Spec->catfile($to, $resource->{as}))
         : (to => $to);
+    my $path = $self->{factory}->resource_manager()->download( $resource, @options );
     die( "$path did not exist after _download of " . dumper( $resource ) ) unless( -e $path );
     $logger->debugf( 'Successfully downloaded resource %s to %s', $resource, $path );
     return $path;
